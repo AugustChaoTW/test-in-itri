@@ -37,7 +37,7 @@ def evaluate_model(model, X_test, y_test):
     try:
         y_proba = model.predict_proba(X_test)[:, 1]
         roc = roc_auc_score(y_test, y_proba)
-    except Exception:
+    except (ValueError, KeyError, AttributeError):
         roc = 0.0
     return {"accuracy": accuracy_score(y_test, y_pred),
             "precision": precision_score(y_test, y_pred, zero_division=0),
